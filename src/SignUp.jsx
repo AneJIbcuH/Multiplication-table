@@ -44,50 +44,6 @@ function SignUp() {
       console.error(error)
     })
 
-  // // axios.post("https://internsapi.public.osora.ru/api/auth/signup", {
-  // //   firstName: 'Fred',
-  // //   lastName: 'Flintstone'
-  // // })
-  // // .then(function (response) {
-  // //   console.log(response);
-  // // })
-  // // .catch(function (error) {
-  // //   console.log(error);
-  // // });
-
-  // async function sendPostRequest(login, file) {
-  //   const url = "https://apiinterns.osora.ru"
-  
-  //   const formData = new FormData()
-  //   formData.append("login", login)
-  //   formData.append("file", file)
-  
-  //   const authHeader = btoa("Dev:qdprivate") // for code to Base64 login and password
-  
-  //   const requestOptions = {
-  //     method: "POST",
-  //     headers: {
-  //       Authorization: `Basic ${authHeader}`,
-  //     },
-  //     body: formData,
-  //   }
-  
-  //   try {
-  //     const response = await fetch(url, requestOptions)
-  //     if (response.ok) {
-         
-  //       let result = await response.json()
-                
-  //       console.log(result)  
-        
-  //     } else {
-  //       console.error("Get some error", response.status, response.statusText)
-  //     }
-  //   } catch (error) {
-  //     console.error("Ne rabotaet: ", error)
-  //   }
-  // }
-
   return (
     <div className="signUp">
       <input type="text" placeholder="name"/>
