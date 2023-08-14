@@ -1,6 +1,8 @@
 .app {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .signUp {
@@ -11,4 +13,35 @@
     width: 500px;
     height: 180px;
     border: solid black 2px;
+}
+
+.game {
+    font-size: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    border: solid black 2px;
+}
+
+.game_btn-answer {
+    height: 60px;
+    width: 90px;
+    margin: 10px;
+    background: transparent;
+    border-radius: 5px;
+    font-size: 30px;
+}
+
+.game_btn-answer:hover {
+    cursor: pointer;
+    background: rgb(180, 168, 166);
+}
+
+.game_btn-answer:active {
+    background: rgb(255, 183, 107);
+}
+
+.game_btn {
+    width: 150px;
 }
