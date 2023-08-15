@@ -24,7 +24,7 @@
     border: solid black 2px;
 }
 
-.game_btn-answer {
+.game_btn {
     height: 60px;
     width: 90px;
     margin: 10px;
@@ -33,15 +33,28 @@
     font-size: 30px;
 }
 
-.game_btn-answer:hover {
+.game_btn:hover {
     cursor: pointer;
     background: rgb(180, 168, 166);
 }
 
-.game_btn-answer:active {
+.game_btn:active {
     background: rgb(255, 183, 107);
 }
 
-.game_btn {
+.game_btn-answer {
     width: 150px;
+}
+
+.startgame_btn {
+    width: 120px;
+}
+
+.startgame {
+    font-size: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    border: solid black 2px;
 }
