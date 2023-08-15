@@ -5,7 +5,7 @@ function App() {
 
   return (
     <div className='app'>
-      <SignUp></SignUp>
+{/*       <SignUp></SignUp> */}
       <Game></Game>
     </div>
   )
