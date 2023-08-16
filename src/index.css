@@ -21,7 +21,8 @@
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    border: solid black 2px;
+    border-radius: 10px;
+    background: #a4a4a4;
 }
 
 .game_btn {
@@ -31,11 +32,12 @@
     background: transparent;
     border-radius: 5px;
     font-size: 30px;
+    box-shadow: 5px 5px 5px rgb(78, 74, 74);
 }
 
 .game_btn:hover {
     cursor: pointer;
-    background: rgb(180, 168, 166);
+    background: rgb(250, 234, 205);
 }
 
 .game_btn:active {
@@ -51,10 +53,55 @@
 }
 
 .startgame {
+    width: 510px;
+    height: 200px;
     font-size: 30px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    border: solid black 2px;
+    border-radius: 10px;
+    background: #a4a4a4;
+}
+
+.startgame select {
+    background: transparent;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 5px 5px 5px rgb(78, 74, 74);
+}
+
+.startgame select:hover {
+    cursor: pointer;
+    background: rgb(250, 234, 205);
+}
+
+.totalGame {
+    background: #a4a4a4;
+    width: 530px;
+    font-size: 30px;
+    border-radius: 10px;
+}
+
+.totalGame p {
+    text-align: center;
+}
+
+.totalGameP {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.totalGameP p {
+    width: 170px;
+    margin: auto;
+    margin-left: 5;
+}
+
+.totalGameP div {
+    width: 510px;
+    display: flex;
+    margin: 5px 0 5px 10px;
+    background: rgb(250, 234, 205);
+    border-radius: 5px;
 }
