@@ -36,6 +36,7 @@ function Game() {
 
             axios.post('https://internsapi.public.osora.ru/api/game/play', data2, { headers })
             .then(response => {
+            console.log(response)  
             setInfo(response.data.data)
             console.log(info)
             })
@@ -47,7 +48,7 @@ function Game() {
     
     return (
         <div>
-            {info == '' ?
+            {info == '' &&
 
                 <div className="startgame">
                     <select>
@@ -57,8 +58,9 @@ function Game() {
                     </select>
                     <button className="game_btn startgame_btn" onClick={startGame}>START</button>
                 </div>
+            }
             
-            :
+            {info.time && 
 
                 <div className="game">
                     <p>SCORE:{info.points}</p>
@@ -71,6 +73,26 @@ function Game() {
                         <button className="game_btn" value={info.options[3]}>{info.options[3]}</button>
                     </div>
                     <button className="game_btn-answer game_btn">Go Back</button>
+                </div>
+            }
+
+            {info.questions && 
+
+                <div className="totalGame">
+                    <p>SCORE:{info.points}</p>
+                    <p>END GAME</p>
+                    <div className="totalGameP">
+                        <p>Question</p>
+                        <p>Answer</p>
+                        <p>Correct</p>
+                        {info.questions.map(question => (
+                            <div>
+                                <p>{question.question}</p>
+                                <p>{question.answer}</p>
+                                <p>{question.current_answer}</p>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             }
         </div>     
