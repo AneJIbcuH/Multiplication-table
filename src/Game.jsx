@@ -48,7 +48,7 @@ function Game() {
     
     return (
         <div>
-            {info == '' &&
+            {!info &&
 
                 <div className="startgame">
                     <select>
