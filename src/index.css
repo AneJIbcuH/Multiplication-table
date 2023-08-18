@@ -15,6 +15,10 @@
     background: #a4a4a4;
 }
 
+.auth_ {
+    margin-left: 90px;
+}
+
 .auth input {
     background: rgb(205, 203, 203);
     border: none;
