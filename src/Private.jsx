@@ -1,5 +1,9 @@
 function Private({ onChange }) {
-  let allInfo = localStorage.getItem("allInfo");
+  let allInfo;
+  if (localStorage.getItem("allInfo")) {
+    allInfo = JSON.parse(localStorage.getItem("allInfo"));
+    console.log(allInfo[0]);
+  }
 
   function toGame() {
     onChange("Game");
@@ -7,25 +11,25 @@ function Private({ onChange }) {
 
   return (
     <div className="private">
-      <p>tosi bosi</p>
-      <button onClick={toGame}>Играть</button>
+      <p>Личный кабинет</p>
+      <button className="game_btn startgame_btn" onClick={toGame}>
+        Играть
+      </button>
 
-      {allInfo.map((info) => (
+      {Object.values(allInfo).map((info) => (
         <div className="totalGame">
-          <p>Date:{toDateString(info.date)}</p>
-          <p>SCORE:{info.statistic.points}</p>
-          <p>END GAME</p>
+          <p>SCORE:{info.statistic}</p>
+          <p>Date:{info.date}</p>
+          <p>User id:{info.user_id}</p>
+          <p>Id:{info.id}</p>
           <div className="totalGameP">
-            <p>Question</p>
-            <p>Answer</p>
-            <p>Correct</p>
-            {info.statistic.questions.map((question) => (
+            {/* {info.statistic.questions.map((question) => (
               <div>
                 <p>{question.question}</p>
                 <p>{question.answer}</p>
                 <p>{question.current_answer}</p>
               </div>
-            ))}
+            ))} */}
           </div>
         </div>
       ))}
