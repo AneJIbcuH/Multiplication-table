@@ -143,3 +143,14 @@
     background: rgb(250, 234, 205);
     border-radius: 5px;
 }
+
+.private {
+    font-size: 30px;
+    width: 530px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 10px;
+    background: #a4a4a4;
+}
