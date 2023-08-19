@@ -1,4 +1,4 @@
-import { useState} from "react";
+import { useState } from "react";
 
 function Game({ onChange }) {
   const [info, setInfo] = useState("");
@@ -42,16 +42,34 @@ function Game({ onChange }) {
         })
         .then((response) => {
           console.log(response);
-          setInfo(response.data.data);
-          if (info.questions) {
-            let allInfo = []
+          console.log(response.data.data);
+          let trueAnswers = 0;
+          if (response.data.data.questions) {
+            response.data.data.questions.map((question) => {
+              if (question.question == question.answer) {
+                trueAnswers++;
+              }
+            });
+            console.log("правильных ответов всего:", trueAnswers);
+            let allInfo = [];
             let testInfo = {
-                date: Date.now(),
-                statistic: response.data.data
+              id: response.data.data.id,
+              user_id: response.data.data.user_id,
+              date: response.data.data.updated_at,
+              statistic: response.data.data.points,
+            };
+            if (localStorage.getItem("allInfo")) {
+              allInfo = JSON.parse(localStorage.getItem("allInfo"));
+              allInfo.push(testInfo);
+              let strAllInfo = JSON.stringify(allInfo);
+              localStorage.setItem("allInfo", strAllInfo);
+            } else {
+              allInfo.push(testInfo);
+              let strAllInfo = JSON.stringify(allInfo);
+              localStorage.setItem("allInfo", strAllInfo);
             }
-            allInfo.push(testInfo)
-            localStorage.setItem('allInfo', allInfo)
           }
+          setInfo(response.data.data);
           console.log(info);
         })
         .catch((error) => {
@@ -65,7 +83,7 @@ function Game({ onChange }) {
   }
 
   function goPrivate() {
-    onChange('Private')
+    onChange("Private");
   }
 
   return (
@@ -118,17 +136,19 @@ function Game({ onChange }) {
           <p>END GAME</p>
           <div className="totalGameP">
             <p>Question</p>
-            <p>Answer</p>
             <p>Correct</p>
+            <p>Answer</p>
             {info.questions.map((question) => (
-              <div>
+              <div key={Math.random()}>
                 <p>{question.question}</p>
                 <p>{question.answer}</p>
                 <p>{question.current_answer}</p>
               </div>
             ))}
           </div>
-          <button className="game_btn-answer game_btn" onClick={goPrivate}>Go Back</button>
+          <button className="game_btn-answer game_btn" onClick={goPrivate}>
+            Go Back
+          </button>
         </div>
       )}
     </div>
