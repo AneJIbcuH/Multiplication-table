@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function SignUp({ onChange }) {
   const [name, setName] = useState("");
@@ -6,6 +6,13 @@ function SignUp({ onChange }) {
   const [password, setPassword] = useState("");
   const [password_confirmation, setPassword_confirmation] = useState("");
   const [signUpped, setSignUpped] = useState(0);
+
+  useEffect(() => {
+    const check = localStorage.getItem("login1");
+    if (check) {
+      onChange("Private");
+    }
+  }, []);
 
   const userData1 = {
     name: name,
@@ -50,7 +57,7 @@ function SignUp({ onChange }) {
       .then((response) => {
         localStorage.setItem("token", response.data.data.access_token);
         localStorage.setItem("login1", userData2.email);
-        localStorage.setItem("login2", userData2.password);
+        // localStorage.setItem("login2", userData2.password);
         setEmail("");
         setPassword("");
         console.log(response.data.data.access_token);
@@ -138,9 +145,3 @@ function SignUp({ onChange }) {
 }
 
 export default SignUp;
-
-    
-  )
-}
-
-export default SignUp
