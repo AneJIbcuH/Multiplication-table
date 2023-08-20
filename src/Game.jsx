@@ -45,14 +45,15 @@ function Game({ onChange }) {
           console.log(response.data.data);
           let trueAnswers = 0;
           if (response.data.data.questions) {
-            response.data.data.questions.map((question) => {
-              if (question.question == question.answer) {
+            response.data.data.questions.forEach((question) => {
+              if (question.current_answer == question.answer) {
                 trueAnswers++;
               }
             });
             console.log("правильных ответов всего:", trueAnswers);
             let allInfo = [];
             let testInfo = {
+              trueAnswers: trueAnswers,
               id: response.data.data.id,
               user_id: response.data.data.user_id,
               date: response.data.data.updated_at,
