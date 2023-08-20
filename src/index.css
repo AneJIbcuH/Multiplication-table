@@ -118,7 +118,8 @@
     background: #a4a4a4;
     width: 530px;
     font-size: 30px;
-    border-radius: 10px;
+    border-bottom: solid rgb(250, 234, 205);
+    border-top: solid rgb(250, 234, 205);
 }
 
 .totalGame p {
