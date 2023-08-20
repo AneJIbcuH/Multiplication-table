@@ -1,7 +1,19 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function Game({ onChange }) {
   const [info, setInfo] = useState("");
+
+  useEffect(() => {
+    const timerID = setInterval(() => tick(), 1000);
+    return () => clearInterval(timerID);
+  });
+
+  function tick() {
+    console.log(info.time);
+    if (info.time > 0) {
+      setInfo({ ...info, time: info.time - 1 });
+    }
+  }
 
   const access_token = localStorage.getItem("token");
   const headers = {
@@ -56,7 +68,7 @@ function Game({ onChange }) {
               trueAnswers: trueAnswers,
               id: response.data.data.id,
               user_id: response.data.data.user_id,
-              date: response.data.data.updated_at,
+              date: new Date().toLocaleString(),
               statistic: response.data.data.points,
             };
             if (localStorage.getItem("allInfo")) {
@@ -104,7 +116,7 @@ function Game({ onChange }) {
         </div>
       )}
 
-      {info.time && (
+      {info.options && (
         <div className="game">
           <p>SCORE:{info.points}</p>
           <p>
