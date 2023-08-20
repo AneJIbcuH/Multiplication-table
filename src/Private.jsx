@@ -18,11 +18,11 @@ function Private({ onChange }) {
 
       {Object.values(allInfo).map((info) => (
         <div className="totalGame">
+          <p>Игра №{info.id}</p>
+          <p>Правильных ответов:{info.trueAnswers}</p>
           <p>Очки:{info.statistic}</p>
-          <p>Дата:{info.date}</p>
-          <p>Номер пользователя:{info.user_id}</p>
-          <p>Номер игры:{info.id}</p>
-          <p>Правильных ответов{info.trueAnswers}</p>
+          <p>Дата игры:{info.date}</p>
+          <p>Игрок №{info.user_id}</p>
         </div>
       ))}
     </div>
