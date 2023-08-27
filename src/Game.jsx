@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
 
-function Game({ onChange }) {
+function Game() {
   const [info, setInfo] = useState("");
+  const navigateTo = useNavigate()
 
   useEffect(() => {
     const timerID = setInterval(() => tick(), 1000);
@@ -15,18 +17,19 @@ function Game({ onChange }) {
     }
   }
 
+  const gameUrl = process.env.REACT_APP_GAME
   const access_token = localStorage.getItem("token");
   const headers = {
     "X-Access-Token": `Bearer ${access_token}`,
   };
-  const data1 = {
+  const dataStartGame = {
     type_hard: 1,
     type: 1,
   };
 
   function startGame() {
     axios
-      .post("https://internsapi.public.osora.ru/api/game/play", data1, {
+      .post(gameUrl, dataStartGame, {
         headers,
       })
       .then((response) => {
@@ -42,14 +45,14 @@ function Game({ onChange }) {
     if (event.target.value) {
       console.log(event.target.value);
 
-      const data2 = {
+      const dataGame = {
         answer: event.target.value,
         type_hard: 1,
         type: 2,
       };
 
       axios
-        .post("https://internsapi.public.osora.ru/api/game/play", data2, {
+        .post(gameUrl, dataGame, {
           headers,
         })
         .then((response) => {
@@ -96,7 +99,7 @@ function Game({ onChange }) {
   }
 
   function goPrivate() {
-    onChange("Private");
+    navigateTo("/Private");
   }
 
   return (

@@ -1,22 +1,26 @@
 import SignUp from "./SignUp";
 import Game from "./Game";
 import Private from "./Private";
-import { useState } from "react";
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 function App() {
-  const [page, setPage] = useState("SignUp");
-  const switchPage = (newPage) => {
-    setPage(newPage);
-  };
 
   return (
-    <div className="app">
-      {page == "SignUp" && <SignUp onChange={switchPage}></SignUp>}
+    <Router>
+      <div className="app">
 
-      {page == "Game" && <Game onChange={switchPage}></Game>}
+        <Routes>
 
-      {page == "Private" && <Private onChange={switchPage}></Private>}
-    </div>
+          <Route path="/" element={<SignUp />}></Route>
+
+          <Route path="/Game" element={<Game />}></Route>
+
+          <Route path="/Private" element={<Private />}></Route>
+
+        </Routes>
+      </div>
+    </Router>
+    
   );
 }
 

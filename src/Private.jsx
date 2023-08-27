@@ -1,4 +1,8 @@
-function Private({ onChange }) {
+import { useNavigate } from 'react-router-dom';
+
+function Private() {
+  const navigateTo = useNavigate()
+
   let allInfo;
   if (localStorage.getItem("allInfo")) {
     allInfo = JSON.parse(localStorage.getItem("allInfo"));
@@ -6,7 +10,7 @@ function Private({ onChange }) {
   }
 
   function toGame() {
-    onChange("Game");
+    navigateTo("/Game");
   }
 
   return (
