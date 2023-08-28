@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
+import { apiGame } from "./config";
 
 function Game() {
   const [info, setInfo] = useState("");
@@ -17,7 +18,6 @@ function Game() {
     }
   }
 
-  const gameUrl = process.env.REACT_APP_GAME
   const access_token = localStorage.getItem("token");
   const headers = {
     "X-Access-Token": `Bearer ${access_token}`,
@@ -29,7 +29,7 @@ function Game() {
 
   function startGame() {
     axios
-      .post(gameUrl, dataStartGame, {
+      .post(apiGame, dataStartGame, {
         headers,
       })
       .then((response) => {
@@ -41,18 +41,19 @@ function Game() {
       });
   }
 
-  function nextQuestion(event) {
-    if (event.target.value) {
-      console.log(event.target.value);
+  function nextQuestion(value) {
+    console.log(value);
+    if (value) {
+      console.log(value);
 
       const dataGame = {
-        answer: event.target.value,
+        answer: value,
         type_hard: 1,
         type: 2,
       };
 
       axios
-        .post(gameUrl, dataGame, {
+        .post(apiGame, dataGame, {
           headers,
         })
         .then((response) => {
@@ -126,7 +127,7 @@ function Game() {
             TIMER:<a>{info.time}</a>
           </p>
           <p>{info.question}?</p>
-          <div onClick={nextQuestion}>
+          <div onClick={(e) => nextQuestion(e.target.value)}>
             <button className="game_btn" value={info.options[0]}>
               {info.options[0]}
             </button>
