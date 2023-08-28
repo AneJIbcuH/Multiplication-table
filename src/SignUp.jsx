@@ -1,7 +1,6 @@
 import { useEffect } from "react";
-import { BrowserRouter as Router, Route, Routes, useNavigate } from "react-router-dom";
-import ToLogIn from "./ToLogIn";
-import ToSignUp from "./ToSignUp";
+import { useNavigate } from "react-router-dom";
+
 
 function SignUp() {
   const navigateTo = useNavigate();
@@ -31,12 +30,6 @@ function SignUp() {
           Авторизоваться
         </button>
       </div>
-      <Router>
-        <Routes>
-          <Route path="/ToSignUp" element={<ToSignUp />}></Route>
-          <Route path="/ToLogIn" element={<ToLogIn />}></Route>
-        </Routes>
-      </Router>
     </div>
   );
 }
