@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import { apiGame } from "./config";
 
 function Game() {
   const [info, setInfo] = useState("");
-  const navigateTo = useNavigate()
+  const navigateTo = useNavigate();
 
   useEffect(() => {
     const timerID = setInterval(() => tick(), 1000);
@@ -27,71 +27,71 @@ function Game() {
     type: 1,
   };
 
-  function startGame() {
-    axios
-      .post(apiGame, dataStartGame, {
-        headers,
-      })
-      .then((response) => {
-        setInfo(response.data.data);
-        console.log(info);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }
-
-  function nextQuestion(value) {
-    console.log(value);
-    if (value) {
-      console.log(value);
-
-      const dataGame = {
-        answer: value,
-        type_hard: 1,
-        type: 2,
-      };
-
+  function gameOn(value) {
+    if (!info) {
       axios
-        .post(apiGame, dataGame, {
+        .post(apiGame, dataStartGame, {
           headers,
         })
         .then((response) => {
-          console.log(response);
-          console.log(response.data.data);
-          let trueAnswers = 0;
-          if (response.data.data.questions) {
-            response.data.data.questions.forEach((question) => {
-              if (question.current_answer == question.answer) {
-                trueAnswers++;
-              }
-            });
-            console.log("правильных ответов всего:", trueAnswers);
-            let allInfo = [];
-            let testInfo = {
-              trueAnswers: trueAnswers,
-              id: response.data.data.id,
-              user_id: response.data.data.user_id,
-              date: new Date().toLocaleString(),
-              statistic: response.data.data.points,
-            };
-            if (localStorage.getItem("allInfo")) {
-              allInfo = JSON.parse(localStorage.getItem("allInfo"));
-              allInfo.push(testInfo);
-              let strAllInfo = JSON.stringify(allInfo);
-              localStorage.setItem("allInfo", strAllInfo);
-            } else {
-              allInfo.push(testInfo);
-              let strAllInfo = JSON.stringify(allInfo);
-              localStorage.setItem("allInfo", strAllInfo);
-            }
-          }
           setInfo(response.data.data);
           console.log(info);
         })
         .catch((error) => {
           console.error(error);
         });
+    } else {
+      console.log(value);
+      if (value) {
+        console.log(value);
+
+        const dataGame = {
+          answer: value,
+          type_hard: 1,
+          type: 2,
+        };
+
+        axios
+          .post(apiGame, dataGame, {
+            headers,
+          })
+          .then((response) => {
+            console.log(response);
+            console.log(response.data.data);
+            let trueAnswers = 0;
+            if (response.data.data.questions) {
+              response.data.data.questions.forEach((question) => {
+                if (question.current_answer == question.answer) {
+                  trueAnswers++;
+                }
+              });
+              console.log("правильных ответов всего:", trueAnswers);
+              let allInfo = [];
+              let testInfo = {
+                trueAnswers: trueAnswers,
+                id: response.data.data.id,
+                user_id: response.data.data.user_id,
+                date: new Date().toLocaleString(),
+                statistic: response.data.data.points,
+              };
+              if (localStorage.getItem("allInfo")) {
+                allInfo = JSON.parse(localStorage.getItem("allInfo"));
+                allInfo.push(testInfo);
+                let strAllInfo = JSON.stringify(allInfo);
+                localStorage.setItem("allInfo", strAllInfo);
+              } else {
+                allInfo.push(testInfo);
+                let strAllInfo = JSON.stringify(allInfo);
+                localStorage.setItem("allInfo", strAllInfo);
+              }
+            }
+            setInfo(response.data.data);
+            console.log(info);
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      }
     }
   }
 
@@ -114,7 +114,7 @@ function Game() {
             <option value="1">Легко/Easy</option>
             <option value="2">Тяжело/Hard</option>
           </select>
-          <button className="game_btn startgame_btn" onClick={startGame}>
+          <button className="game_btn startgame_btn" onClick={gameOn}>
             START
           </button>
         </div>
@@ -127,7 +127,7 @@ function Game() {
             TIMER:<a>{info.time}</a>
           </p>
           <p>{info.question}?</p>
-          <div onClick={(e) => nextQuestion(e.target.value)}>
+          <div onClick={(e) => gameOn(e.target.value)}>
             <button className="game_btn" value={info.options[0]}>
               {info.options[0]}
             </button>
