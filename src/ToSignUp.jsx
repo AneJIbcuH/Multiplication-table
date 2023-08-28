@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
+import { apiSignUp } from "./config";
 
 function ToSignUp() {
   const [name, setName] = useState("");
@@ -22,7 +23,7 @@ function ToSignUp() {
 
   function signUp() {
     axios
-      .post("https://internsapi.public.osora.ru/api/auth/signup", dataSignUp, {
+      .post(apiSignUp, dataSignUp, {
         headers,
       })
       .then((response) => {
